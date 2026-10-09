@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:460px;margin:auto">
+  <h2>Login</h2>
+  <form method="post">
+    <label>Email</label><input type="email" name="email" required>
+    <label>Password</label><input type="password" name="password" required>
+    <button class="btn" type="submit">Login</button>
+  </form>
+  <p style="font-size:.85rem;color:#666">Admin demo: admin@college.edu / admin123</p>
+</div>
+{% endblock %}

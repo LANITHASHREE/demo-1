@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>My Complaints</h2>
+  {% if complaints %}
+  {% for c in complaints %}
+    <div style="border-bottom:1px solid #e5e8f0;padding:12px 0">
+      <b>#{{ c.id }} · {{ c.subject }}</b>
+      <span class="badge {{ c.status|replace(' ','-') }}">{{ c.status }}</span><br>
+      <small>{{ c.category }} · {{ c.created_at }}</small>
+      <p>{{ c.description }}</p>
+      {% if c.admin_reply %}<div class="reply"><b>Admin reply:</b> {{ c.admin_reply }}</div>{% endif %}
+    </div>
+  {% endfor %}
+  {% else %}
+    <p>No complaints yet.</p>
+  {% endif %}
+  <a class="btn" href="{{ url_for('new_complaint') }}">+ New Complaint</a>
+</div>
+{% endblock %}

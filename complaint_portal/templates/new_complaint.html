@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Submit a Complaint</h2>
+  <form method="post">
+    <label>Category</label>
+    <select name="category" required>
+      {% for c in categories %}<option>{{ c }}</option>{% endfor %}
+    </select>
+    <label>Subject</label><input name="subject" maxlength="150" required>
+    <label>Description</label><textarea name="description" required></textarea>
+    <button class="btn" type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}

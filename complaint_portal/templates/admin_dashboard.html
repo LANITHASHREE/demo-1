@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="stats">
+  {% for s in statuses %}<div class="stat"><b>{{ counts[s] }}</b>{{ s }}</div>{% endfor %}
+</div>
+<div class="card">
+  <form class="filters" method="get">
+    <div><label>Status</label>
+      <select name="status"><option value="">All</option>
+        {% for s in statuses %}<option {{ 'selected' if s==sel_status }}>{{ s }}</option>{% endfor %}
+      </select></div>
+    <div><label>Category</label>
+      <select name="category"><option value="">All</option>
+        {% for c in categories %}<option {{ 'selected' if c==sel_category }}>{{ c }}</option>{% endfor %}
+      </select></div>
+    <button class="btn" type="submit" style="margin-top:0">Filter</button>
+  </form>
+</div>
+<div class="card" style="overflow-x:auto">
+  <h2>All Complaints</h2>
+  <table>
+    <tr><th>ID</th><th>Student</th><th>Category</th><th>Subject</th><th>Status</th><th>Date</th><th></th></tr>
+    {% for c in complaints %}
+    <tr>
+      <td>{{ c.id }}</td><td>{{ c.name }}<br><small>{{ c.roll_no }}</small></td>
+      <td>{{ c.category }}</td><td>{{ c.subject }}</td>
+      <td><span class="badge {{ c.status|replace(' ','-') }}">{{ c.status }}</span></td>
+      <td>{{ c.created_at }}</td>
+      <td><a class="btn small" href="{{ url_for('admin_complaint', cid=c.id) }}">Open</a></td>
+    </tr>
+    {% else %}<tr><td colspan="7">No complaints found.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
